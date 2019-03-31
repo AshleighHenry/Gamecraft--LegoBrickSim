@@ -45,17 +45,7 @@ void Game::processEvents()
 		{
 			m_window.close();
 		}
-		if (event.type == sf::Event::MouseButtonPressed && m_gameState == GameState::PLAY)
-		{
-			if (event.key.code == sf::Mouse::Left)
-			{	
-				if (m_currentBlock < s_MAX_BLOCKS)
-				{
-					m_blocks[m_currentBlock]->changeActive();
-					m_currentBlock++;
-				}
-			}
-		}
+
 		switch (m_gameState)
 		{
 		case GameState::SPLASH_SCREEN:
@@ -64,6 +54,15 @@ void Game::processEvents()
 			m_menu.processEvents(event);
 			break;
 		case GameState::PLAY:
+			if (event.type == sf::Event::MouseButtonPressed)
+			{
+				if (event.key.code == sf::Mouse::Left)
+				{
+					m_block = new Block((rand() % 6), (rand() % 6) + 1,
+						sf::Vector2f(m_mousePos));
+					m_madeBlocks.push_back(*m_block);
+				}
+			}
 			break;
 		case GameState::CREDITS:
 			m_credits.processEvents(event, m_gameState);
@@ -92,6 +91,8 @@ void Game::update(sf::Time dt)
 		m_menu.update(m_gameState);
 		break;
 	case GameState::PLAY:
+		m_player.update(dt);
+
 		for (int i = 0; i < s_MAX_BLOCKS; i++)
 		{
 			if (m_blocks[i]->getActive())
@@ -103,8 +104,6 @@ void Game::update(sf::Time dt)
 				
 			}
 		}
-
-		m_player.update(dt);
 
 		break;
 	case GameState::CREDITS:
