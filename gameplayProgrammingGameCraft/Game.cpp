@@ -100,14 +100,14 @@ void Game::update(sf::Time dt)
 				if (m_blocks[i]->collisions(m_player))
 				{
 					break; // break when colliding
-				}
-				
+				}				
 			}
 		}
 		if (m_checkPoint->checkCollision(m_player))
 		{
-			std::cout << "win" << std::endl;
+			// reset level
 		}
+		
 		m_player.update(dt);
 		m_checkPoint->update();
 		break;
