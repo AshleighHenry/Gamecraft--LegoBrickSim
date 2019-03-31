@@ -56,11 +56,13 @@ void Game::processEvents()
 		case GameState::PLAY:
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
-				if (event.key.code == sf::Mouse::Left)
+				if(event.key.code == sf::Mouse::Left)
 				{
-					m_block = new Block((rand() % 6), (rand() % 6) + 1,
-						sf::Vector2f(m_mousePos));
-					m_madeBlocks.push_back(*m_block);
+					if (m_currentBlock < s_MAX_BLOCKS)
+					{
+						m_blocks[m_currentBlock]->changeActive();
+						m_currentBlock++;
+					}
 				}
 			}
 			break;
