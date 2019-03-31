@@ -11,10 +11,14 @@ public:
 	void render(sf::RenderWindow &t_window);
 	void changeColor();
 	void updateColour();
+	sf::Vector2f getPosition();
 private:
 	sf::RectangleShape m_body;
+	sf::RectangleShape m_bodyTwo;
+
 	sf::Vector2f m_size;
 	sf::Color m_color;
 	sf::Color m_newColor;
+
 };
 

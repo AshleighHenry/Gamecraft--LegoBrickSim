@@ -141,8 +141,11 @@
     <ClInclude Include="CheckPoint.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Particle.h" />
+    <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SplashScreen.h" />
   </ItemGroup>

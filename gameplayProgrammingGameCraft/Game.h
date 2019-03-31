@@ -10,6 +10,9 @@
 #include "Block.h"
 #include "Credits.h"
 #include "CheckPoint.h"
+
+#include "ParticleSystem.h"
+#include "Fire.h"
 class SplashScreen;
 class Player;
 
@@ -37,6 +40,11 @@ private:
 	Block * m_blocks[s_MAX_BLOCKS];
 	CheckPoint * m_checkPoint;
 
+	
+	
+	int particleCounter;
+	Fire m_checkpointParticles;
+	
 };
 
 #endif // !GAME

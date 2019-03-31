@@ -1,6 +1,10 @@
 #include "Game.h"
 #include <iostream>
 
+#include "ParticleSystem.h"
+#include "fire.h"
+#include <iostream>
+
 Game::Game() :
 	m_window{ sf::VideoMode{ 1024, 720 }, "SMFL Game" }
 {
@@ -14,6 +18,11 @@ Game::Game() :
 			sf::Vector2f(0, -10));
 	}
 	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 1000 + 20, 700));
+
+	
+	particleCounter = 0;
+	m_checkpointParticles.Initialise( m_checkPoint->getPosition());
+	
 }
 
 void Game::run()
@@ -107,7 +116,8 @@ void Game::update(sf::Time dt)
 		{
 			// reset level
 		}
-		
+		m_checkpointParticles.update();
+		m_checkpointParticles.reset();
 		m_player.update(dt);
 		m_checkPoint->update();
 		break;
@@ -118,6 +128,9 @@ void Game::update(sf::Time dt)
 	default:
 		break;
 	}
+	
+
+	
 	m_blocks[m_currentBlock]->setPosition( static_cast<sf::Vector2f>(m_mousePos));
 
 }
@@ -143,6 +156,7 @@ void Game::render()
 		}
 		m_player.render(m_window);
 		m_checkPoint->render(m_window);
+		m_checkpointParticles.render(m_window);
 		break;
 	case GameState::CREDITS:
 		m_credits.render(m_window);
@@ -152,8 +166,8 @@ void Game::render()
 	default:
 		break;
 	}
-
-
+	
+	
 	m_window.display();
 }
 
