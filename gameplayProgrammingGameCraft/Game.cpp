@@ -13,6 +13,7 @@ Game::Game() :
 		m_blocks[i] = new Block((rand() % 6), (rand() % 6) + 1,
 			sf::Vector2f(0, -10));
 	}
+	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 1000 + 20, 700));
 }
 
 void Game::run()
@@ -103,9 +104,12 @@ void Game::update(sf::Time dt)
 				
 			}
 		}
-
+		if (m_checkPoint->checkCollision(m_player))
+		{
+			std::cout << "win" << std::endl;
+		}
 		m_player.update(dt);
-
+		m_checkPoint->update();
 		break;
 	case GameState::CREDITS:
 		break;
@@ -138,6 +142,7 @@ void Game::render()
 			m_blocks[i]->render(m_window);
 		}
 		m_player.render(m_window);
+		m_checkPoint->render(m_window);
 		break;
 	case GameState::CREDITS:
 		m_credits.render(m_window);

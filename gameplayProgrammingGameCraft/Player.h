@@ -18,8 +18,7 @@ public:
 	void activeCollision();
 	void deactiveCollision();
 
-	sf::RectangleShape const getBody();
-
+	sf::RectangleShape getBody() const;
 private:
 
 	sf::Sprite playerSprite;

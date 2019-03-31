@@ -68,7 +68,7 @@ void Player::deactiveCollision()
 	colliding = false;
 }
 
-sf::RectangleShape const Player::getBody()
+sf::RectangleShape Player::getBody() const
 {
 	return m_rectangle;
 }

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Block.h"
 #include "Credits.h"
+#include "CheckPoint.h"
 class SplashScreen;
 class Player;
 
@@ -34,7 +35,7 @@ private:
 	Player m_player;
 	static const int s_MAX_BLOCKS = 10;
 	Block * m_blocks[s_MAX_BLOCKS];
-	//std::list<Block> m_madeBlocks;
+	CheckPoint * m_checkPoint;
 
 };
 
