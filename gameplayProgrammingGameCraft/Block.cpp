@@ -92,7 +92,7 @@ bool Block::collisions(Player & t_player)
 {
 	if (t_player.getBody().getGlobalBounds().intersects(m_blockSprite.getGlobalBounds()))
 	{
-		t_player.activeCollision();
+   		t_player.activeCollision();
 
 		return true;
 	}

@@ -4,6 +4,11 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
+enum playerJumpState
+{
+	Ground,
+	Air
+};
 
 class Player
 {
@@ -17,6 +22,8 @@ public:
 	void collisions();
 	void activeCollision();
 	void deactiveCollision();
+
+	void jump();
 
 	sf::RectangleShape const getBody();
 
@@ -36,6 +43,8 @@ private:
 	float time;
 
 	bool colliding{ false };
+
+	playerJumpState m_playerState{ playerJumpState::Air };
 };
 #include "Block.h"
 
