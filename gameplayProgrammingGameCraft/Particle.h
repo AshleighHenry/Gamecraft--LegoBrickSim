@@ -72,7 +72,7 @@ public:
 		}
 		else
 		{
-			m_velocity = sf::Vector2f((vel.x * 3.5f), (vel.y * .5f));
+			m_velocity = sf::Vector2f((vel.x * .5f), (vel.y * .5f));
 		}
 		// 244, 66, 113 237, 109, 142)
 		timetoLive = rand() % 100 + 5;

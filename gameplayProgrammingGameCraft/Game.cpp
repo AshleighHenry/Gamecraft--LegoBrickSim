@@ -3,7 +3,7 @@
 
 #include "ParticleSystem.h"
 #include "fire.h"
-#include <iostream>
+
 
 Game::Game() :
 	m_window{ sf::VideoMode{ 1024, 720 }, "SMFL Game" }
