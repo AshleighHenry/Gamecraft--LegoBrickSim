@@ -12,7 +12,6 @@ Block::Block(int t_colour, int t_size, sf::Vector2f t_position)
 		cout << "block not lodeded" << endl;
 	}
 	m_blockSprite.setTexture(m_texture);
-
 	switch (m_size)
 	{
 	case 0:
@@ -54,7 +53,7 @@ Block::Block(int t_colour, int t_size, sf::Vector2f t_position)
 		break;
 	}
 	m_blockSprite.setPosition(m_position);
-
+	m_blockSprite.setOrigin(m_blockRect.width / 2, m_blockRect.height / 2);
 
 	//initialise();
 }
@@ -66,10 +65,19 @@ Block::~Block()
 
 void Block::setPosition(sf::Vector2f t_position)
 {
+	m_blockSprite.setPosition(t_position);
 }
 
 void Block::render(sf::RenderWindow & t_window)
 {
+	if (m_active ==false)
+	{
+		m_blockSprite.setColor(sf::Color(0, 0, 0, 130));
+	}
+	else
+	{
+		m_blockSprite.setColor(sf::Color(0, 0, 0, 255));
+	}
 	t_window.draw(m_blockSprite);
 }
 
@@ -103,6 +111,16 @@ bool Block::collisions(Player & t_player)
 		return false;
 	}
 
+}
+
+void Block::changeActive()
+{
+	m_active = true;
+}
+
+bool Block::getActive()
+{
+	return m_active;
 }
 
 void Block::initialise()
@@ -144,4 +162,5 @@ void Block::initialise()
 	}
 	m_blockSprite.setPosition(m_position);
 	m_blockSprite.setTextureRect(m_blockRect);
+	m_active = true;
 }

@@ -28,13 +28,13 @@ private:
 	sf::Font m_font;
 	SplashScreen * m_splashscreen;
 	Credits m_credits;
-
-	Block * m_block;
-
+	sf::Vector2i m_mousePos;
+	//Block * m_block;
+	int m_currentBlock = 0; // the block the player can currently spawn
 	Player m_player;
-
-	Block * m_blocks[30];
-	std::list<Block> m_madeBlocks;
+	static const int s_MAX_BLOCKS = 10;
+	Block * m_blocks[s_MAX_BLOCKS];
+	//std::list<Block> m_madeBlocks;
 
 };
 

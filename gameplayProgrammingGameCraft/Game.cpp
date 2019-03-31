@@ -8,7 +8,11 @@ Game::Game() :
 
 	srand(static_cast<unsigned>(time(NULL)));
 
-
+	for (int i = 0; i < s_MAX_BLOCKS; i++)
+	{
+		m_blocks[i] = new Block((rand() % 6), (rand() % 6) + 1,
+			sf::Vector2f(0, -10));
+	}
 }
 
 void Game::run()
@@ -35,19 +39,21 @@ void Game::processEvents()
 	sf::Event event;
 	while (m_window.pollEvent(event))
 	{
-		sf::Vector2i m_mousePos = sf::Mouse::getPosition(m_window);
+		m_mousePos =  sf::Mouse::getPosition(m_window);
 
 		if (event.type == sf::Event::Closed || m_gameState == GameState::EXIT)
 		{
 			m_window.close();
 		}
-		if (event.type == sf::Event::MouseButtonPressed)
+		if (event.type == sf::Event::MouseButtonPressed && m_gameState == GameState::PLAY)
 		{
 			if (event.key.code == sf::Mouse::Left)
-			{
-				m_block = new Block((rand() % 6), (rand() % 6) + 1,
-					sf::Vector2f(m_mousePos));
-				m_madeBlocks.push_back(*m_block);
+			{	
+				if (m_currentBlock < s_MAX_BLOCKS)
+				{
+					m_blocks[m_currentBlock]->changeActive();
+					m_currentBlock++;
+				}
 			}
 		}
 		switch (m_gameState)
@@ -86,12 +92,15 @@ void Game::update(sf::Time dt)
 		m_menu.update(m_gameState);
 		break;
 	case GameState::PLAY:
-
-		for (Block & block : m_madeBlocks)
+		for (int i = 0; i < s_MAX_BLOCKS; i++)
 		{
-			if (block.collisions(m_player))
+			if (m_blocks[i]->getActive())
 			{
-				break;
+				if (m_blocks[i]->collisions(m_player))
+				{
+					break; // break when colliding
+				}
+				
 			}
 		}
 
@@ -105,7 +114,7 @@ void Game::update(sf::Time dt)
 	default:
 		break;
 	}
-
+	m_blocks[m_currentBlock]->setPosition( static_cast<sf::Vector2f>(m_mousePos));
 
 }
 
@@ -124,11 +133,10 @@ void Game::render()
 		m_menu.render(m_window);
 		break;
 	case GameState::PLAY:
-		for (Block & block : m_madeBlocks)
+		for (int i = 0; i <s_MAX_BLOCKS; i++)
 		{
-			block.render(m_window);
+			m_blocks[i]->render(m_window);
 		}
-
 		m_player.render(m_window);
 		break;
 	case GameState::CREDITS:

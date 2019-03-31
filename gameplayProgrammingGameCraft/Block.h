@@ -18,13 +18,14 @@ public:
 
 	sf::Sprite const getSprite();
 
-
 	bool collisions(Player & t_player);
-
+	void changeActive();
+	bool getActive();
 private:
 	sf::Texture m_texture;
 	sf::Sprite m_blockSprite;
 	sf::IntRect m_blockRect;
+	bool m_active = false;
 
 	int m_colour{ 0 };
 	int m_size{ 5 };
