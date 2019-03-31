@@ -27,6 +27,7 @@ void SplashScreen::render(sf::RenderWindow & t_window)
 
 void SplashScreen::loadAssets()
 {
+	//
 	if (!m_backgroundText.loadFromFile("Resources\\Images\\SplashScreenIMG.png"))
 	{
 		std::cout << "error : splash screen img not loading" << std::endl;
