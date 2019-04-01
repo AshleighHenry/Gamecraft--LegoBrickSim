@@ -10,7 +10,7 @@ public:
 	void update(GameState &t_gamestate);
 	void render(sf::RenderWindow &t_window);
 	void changeSelected();
-
+	sf::Vector2f getCursorPosition();
 private:
 	sf::Vector2f m_buttonPositionStart = sf::Vector2f(200, 200);
 	static const int S_MENU_BUTTONS = 3;
@@ -30,9 +30,9 @@ private:
 	bool m_downPressed = false;
 	bool m_spacePressed = false;
 
-	//sf::SoundBuffer m_selectBuffer;
-	//sf::SoundBuffer m_switchBuffer;
+	sf::SoundBuffer m_selectBuffer;
+	sf::SoundBuffer m_switchBuffer;
 
-	//sf::Sound m_select;
-	//sf::Sound m_switch;
+	sf::Sound m_select;
+	sf::Sound m_switch;
 };

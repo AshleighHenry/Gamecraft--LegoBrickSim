@@ -2,8 +2,6 @@
 
 // Particle.h
 #include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Window/Event.hpp>
 class Particle
 {
 public:
@@ -15,7 +13,13 @@ public:
 	float  dimension = (rand() % 30 *0.2) + 1;
 	sf::Color m_color;
 	sf::Color m_newColor;
-	
+	bool m_checkpoint = true; // set to false if for main menu buttons
+
+	void changeBool()
+	{
+		m_checkpoint = false;
+	}
+
 	void Draw(sf::RenderWindow& t_window)
 	{
 		if (timetoLive > 0)
@@ -63,19 +67,21 @@ public:
 		m_position = pos;
 		
 		m_body.setFillColor(sf::Color(m_color));
-
-		if (dimension > 15)
+		m_velocity = sf::Vector2f((vel.x * 3), (vel.y / 1.5f - 3 * 0.5));
+		if (m_checkpoint)
 		{
 
 			m_velocity = sf::Vector2f((vel.x *3), (vel.y / 1.5f - 3 * 0.5));
-
+			timetoLive = rand() % 100 + 5;
 		}
-		else
+		if (m_checkpoint == false)
 		{
-			m_velocity = sf::Vector2f((vel.x * .5f), (vel.y * .5f));
+			vel.y = 0.01;
+			m_velocity = sf::Vector2f((vel.x * 3.5f), (vel.y * .05));
+			timetoLive = 1;
 		}
 		// 244, 66, 113 237, 109, 142)
-		timetoLive = rand() % 100 + 5;
+		
 		m_newColor = sf::Color(rand() % 244+200, rand() % 66+30, rand() % 150 + 70, 255);
 		m_color = sf::Color(rand() % 234 + 200, rand() % 109 + 30, rand() % 142 + 70, 255);
 	}

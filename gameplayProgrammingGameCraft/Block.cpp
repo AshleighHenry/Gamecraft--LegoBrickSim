@@ -72,11 +72,11 @@ void Block::render(sf::RenderWindow & t_window)
 {
 	if (m_active ==false)
 	{
-		m_blockSprite.setColor(sf::Color(0, 0, 0, 130));
+		m_blockSprite.setColor(sf::Color(255, 255, 255, 130));
 	}
 	else
 	{
-		m_blockSprite.setColor(sf::Color(0, 0, 0, 255));
+		m_blockSprite.setColor(sf::Color(255, 255, 255, 255));
 	}
 	t_window.draw(m_blockSprite);
 }

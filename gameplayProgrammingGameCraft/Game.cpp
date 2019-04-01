@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <iostream>
 
-#include "ParticleSystem.h"
+
 #include "fire.h"
 
 
@@ -21,7 +21,7 @@ Game::Game() :
 
 	
 	particleCounter = 0;
-	m_checkpointParticles.Initialise( m_checkPoint->getPosition());
+	m_checkpointParticles.Initialise( m_checkPoint->getPosition(), false);
 	
 }
 
