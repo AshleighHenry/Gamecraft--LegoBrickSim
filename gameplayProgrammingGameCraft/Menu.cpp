@@ -54,17 +54,17 @@ void Menu::processEvents(sf::Event & t_event)
 {
 	if (t_event.type == sf::Event::KeyReleased)
 	{
-		if (t_event.key.code == sf::Keyboard::Down)
+		if (t_event.key.code == sf::Keyboard::S)
 		{
 			m_downPressed = true;
 			m_switch.play();
 		}
-		if (t_event.key.code == sf::Keyboard::Up)
+		if (t_event.key.code == sf::Keyboard::W)
 		{
 			m_upPressed = true;
 			m_switch.play();
 		}
-		if (t_event.key.code == sf::Keyboard::Space)
+		if (t_event.key.code == sf::Keyboard::Space || t_event.key.code == sf::Keyboard::Return)
 		{
 			m_spacePressed = true;
 			m_select.play();

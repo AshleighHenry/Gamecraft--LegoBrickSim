@@ -17,7 +17,7 @@ public:
 	void collisions();
 	void activeCollision();
 	void deactiveCollision();
-	void reset(sf::Vector2f t_position);
+	void reset(sf::Vector2f t_position, int t_win);
 	sf::RectangleShape getBody() const;
 private:
 

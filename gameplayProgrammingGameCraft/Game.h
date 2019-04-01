@@ -36,13 +36,21 @@ private:
 	//Block * m_block;
 	int m_currentBlock = 0; // the block the player can currently spawn
 	Player m_player;
-	static const int s_MAX_BLOCKS = 10;
+	static const int s_MAX_BLOCKS = 5;
 	Block * m_blocks[s_MAX_BLOCKS];
 	CheckPoint * m_checkPoint;
 
 	int particleCounter;
 	Sparkle m_checkpointParticles;
-	
+	sf::Text m_blocksLeft;
+	sf::Text m_score;
+	int m_playerScore = 0;
+
+	sf::SoundBuffer m_winBuffer;
+	sf::SoundBuffer m_loseBuffer;
+
+	sf::Sound m_win;
+	sf::Sound m_lose;
 };
 
 #endif // !GAME

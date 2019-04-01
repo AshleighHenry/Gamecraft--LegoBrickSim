@@ -68,11 +68,18 @@ void Player::deactiveCollision()
 	colliding = false;
 }
 
-void Player::reset(sf::Vector2f t_position)
+void Player::reset(sf::Vector2f t_position, int t_win)
 {
 	
 	m_rectangle.setPosition(sf::Vector2f(t_position.x,10));
-	m_velocity = sf::Vector2f(0.0f, 0.0f);
+	if (t_win == 1)
+	{
+		// velocity.y doesn't change
+	}
+	else
+	{
+		m_velocity = sf::Vector2f(0, 0);
+	}
 }
 
 sf::RectangleShape Player::getBody() const
