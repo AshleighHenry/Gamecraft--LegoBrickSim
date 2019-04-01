@@ -3,7 +3,12 @@
 
 #include <SFML\Graphics.hpp>
 #include <iostream>
+enum class playerJumpState
+{
+	Air,
+	Ground
 
+};
 
 class Player
 {
@@ -19,8 +24,10 @@ public:
 	void deactiveCollision();
 	void reset(sf::Vector2f t_position, int t_win);
 	sf::RectangleShape getBody() const;
+	void jump();
 private:
 
+	playerJumpState m_playerState{ playerJumpState::Air };
 	sf::Sprite playerSprite;
 	sf::Texture playerTexture;
 

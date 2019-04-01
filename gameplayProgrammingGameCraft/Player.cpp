@@ -5,15 +5,20 @@ Player::Player()
 	m_rectangle.setSize(sf::Vector2f(10, 10));
 	m_rectangle.setFillColor(sf::Color::Red);
 	m_rectangle.setPosition(10, 10);
+	m_playerState = playerJumpState::Ground;
 }
 
 Player::~Player()
 {
 }
-
 void Player::update(sf::Time t_dt)
 {
 	time = t_dt.asSeconds();
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		jump();
+	}
 
 	collisions();
 
@@ -33,6 +38,8 @@ void Player::update(sf::Time t_dt)
 	{
 		m_velocity.x++;
 	}
+
+
 }
 
 void Player::render(sf::RenderWindow & t_window)
@@ -44,14 +51,18 @@ void Player::collisions()
 {
 	if (colliding)
 	{
+
 		m_velocity.y = 0;
 		m_acceleration.y = 0;
 
+		m_playerState = playerJumpState::Ground;
 		m_rectangle.setPosition(m_rectangle.getPosition() + sf::Vector2f((m_velocity * time)) + (m_acceleration * (time * time)));
 		m_velocity = m_velocity + (m_acceleration * time);
 	}
 	else
 	{
+		m_playerState = playerJumpState::Air;
+
 		m_rectangle.setPosition(m_rectangle.getPosition() + sf::Vector2f((m_velocity * time)) + (0.5f * m_gravity * (time * time)));
 		m_velocity = m_velocity + (m_gravity * time);
 	}
@@ -68,6 +79,15 @@ void Player::deactiveCollision()
 	colliding = false;
 }
 
+void Player::jump()
+{
+	if (colliding == true)
+	{
+		colliding = false;
+
+		m_velocity.y = -100;
+	}
+}
 void Player::reset(sf::Vector2f t_position, int t_win)
 {
 	
