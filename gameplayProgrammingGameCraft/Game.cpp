@@ -107,6 +107,8 @@ void Game::processEvents()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 			{
 				m_gameState = GameState::MAIN_MENU;
+				reset();
+				m_player.reset(m_checkPoint->getPosition(), 0);
 			}
 			break;
 		case GameState::CREDITS:
