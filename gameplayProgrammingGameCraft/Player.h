@@ -26,13 +26,15 @@ public:
 	sf::RectangleShape getBody() const;
 	void jump();
 private:
-
+	void updateColour();
+	void changeColor();
 	playerJumpState m_playerState{ playerJumpState::Air };
 	sf::Sprite playerSprite;
 	sf::Texture playerTexture;
 
 	sf::RectangleShape m_rectangle;
-
+	sf::Color m_color;
+	sf::Color m_newColor;
 	const sf::Vector2f m_gravity{ 0, 90.8f };
 
 	sf::Vector2f m_velocity{ 0,0 };

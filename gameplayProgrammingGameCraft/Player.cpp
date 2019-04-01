@@ -2,9 +2,11 @@
 
 Player::Player()
 {
-	m_rectangle.setSize(sf::Vector2f(10, 10));
+	m_rectangle.setSize(sf::Vector2f(20, 20));
+	sf::Color(rand() % 255 + 30, rand() % 255 + 30, rand() % 255 + 30, 255);
 	m_rectangle.setFillColor(sf::Color::Red);
-	m_rectangle.setPosition(10, 10);
+	m_rectangle.setPosition(400, 10);
+	m_rectangle.setOrigin(10, 10);
 	m_playerState = playerJumpState::Ground;
 }
 
@@ -25,10 +27,12 @@ void Player::update(sf::Time t_dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		m_velocity.x += 1;
+		m_rectangle.rotate(3);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		m_velocity.x -= 1;
+		m_rectangle.rotate(-3);
 	}
 	else if (m_velocity.x > 0)
 	{
@@ -38,8 +42,7 @@ void Player::update(sf::Time t_dt)
 	{
 		m_velocity.x++;
 	}
-
-
+	updateColour();
 }
 
 void Player::render(sf::RenderWindow & t_window)
@@ -105,4 +108,44 @@ void Player::reset(sf::Vector2f t_position, int t_win)
 sf::RectangleShape Player::getBody() const
 {
 	return m_rectangle;
+}
+
+
+void Player::changeColor()
+{
+	m_newColor = sf::Color(rand() % 255 + 30, rand() % 255 + 30, rand() % 255 + 30, 255);
+}
+
+void Player::updateColour()
+{
+	if (m_color == m_newColor)
+	{
+		changeColor();
+	}
+	if (m_color.r > m_newColor.r)
+	{
+		m_color.r--;
+	}
+	else if (m_color.r < m_newColor.r)
+	{
+		m_color.r++;
+	}
+
+	if (m_color.g > m_newColor.g)
+	{
+		m_color.g--;
+	}
+	else if (m_color.g < m_newColor.g)
+	{
+		m_color.g++;
+	}
+	if (m_color.b > m_newColor.b)
+	{
+		m_color.b--;
+	}
+	else if (m_color.b < m_newColor.b)
+	{
+		m_color.b++;
+	}
+	m_rectangle.setFillColor(m_color);
 }

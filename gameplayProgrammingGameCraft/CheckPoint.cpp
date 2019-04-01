@@ -4,7 +4,8 @@
 
 CheckPoint::CheckPoint(sf::Vector2f t_position)
 {
-	m_color = sf::Color::Red;
+	m_newColor = sf::Color(rand() % 255 + 30, rand() % 255 + 30, rand() % 255 + 30, 255);
+	m_color = sf::Color(rand() % 255 + 30, rand() % 255 + 30, rand() % 255 + 30, 255);
 	m_body.setFillColor(m_color);
 	m_size = sf::Vector2f(30, 30);
 	m_body.setSize(m_size);
