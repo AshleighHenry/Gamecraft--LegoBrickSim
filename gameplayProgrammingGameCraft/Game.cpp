@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-#include "fire.h"
+#include "Sparkle.h"
 
 
 Game::Game() :
@@ -15,13 +15,13 @@ Game::Game() :
 	for (int i = 0; i < s_MAX_BLOCKS; i++)
 	{
 		m_blocks[i] = new Block((rand() % 6), (rand() % 6) + 1,
-			sf::Vector2f(0, -10));
+			sf::Vector2f(0, -30));
 	}
-	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 1000 + 20, 700));
+	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 1000 + 20,690));
 
 	
 	particleCounter = 0;
-	m_checkpointParticles.Initialise( m_checkPoint->getPosition(), false);
+	m_checkpointParticles.Initialise( m_checkPoint->getPosition());
 	
 }
 
@@ -154,6 +154,14 @@ void Game::render()
 		{
 			m_blocks[i]->render(m_window);
 		}
+		if (m_checkPoint->checkCollision(m_player))
+		{
+			reset();
+		}
+		if (m_player.getBody().getPosition().y > 720)
+		{
+			reset();
+		}
 		m_player.render(m_window);
 		m_checkPoint->render(m_window);
 		m_checkpointParticles.render(m_window);
@@ -173,5 +181,13 @@ void Game::render()
 
 void Game::reset()
 {
+	m_player.reset(m_checkPoint->getPosition());
+	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 1000 + 20, 690 ));
+	m_checkpointParticles.Initialise(m_checkPoint->getPosition());
+	for (int i = 0; i < s_MAX_BLOCKS; i++)
+	{
+		m_blocks[i]->reset((rand() % 6));
 
+		m_currentBlock = 0;
+	}
 }

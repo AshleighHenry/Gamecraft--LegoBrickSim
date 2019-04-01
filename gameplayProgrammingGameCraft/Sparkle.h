@@ -2,23 +2,20 @@
 
 #include "Particle.h"
 #define maxParticles 40
-class Fire
+class Sparkle
 {
 public:
 	
 	Particle particles[maxParticles];
 	sf::Vector2f m_position;
 
-	void Initialise(sf::Vector2f pos, bool t_menu)
+	void Initialise(sf::Vector2f pos)
 	{
 		m_position=pos;
 		for (int i =0;i<maxParticles;i++)
 		{
 			particles[i] = Particle(m_position,sf::Vector2f(rand() / double(RAND_MAX) * 4 - 2, rand() / double(RAND_MAX)*4-2));
-			if (t_menu)
-			{
-				particles[i].changeBool();
-			}
+			
 		}
 		
 	}
@@ -60,6 +57,6 @@ public:
 			}
 		}
 	}
-	Fire(){}
+	Sparkle(){}
 };
 

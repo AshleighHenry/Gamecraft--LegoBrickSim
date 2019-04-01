@@ -2,7 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 #include "Player.h"
-
+#include <SFML\Audio.hpp>
 using namespace std;
 
 class Block
@@ -21,6 +21,7 @@ public:
 	bool collisions(Player & t_player);
 	void changeActive();
 	bool getActive();
+	void reset(int t_size);
 private:
 	sf::Texture m_texture;
 	sf::Sprite m_blockSprite;
@@ -31,7 +32,8 @@ private:
 	int m_size{ 5 };
 	int m_width{ 0 };
 	sf::Vector2f m_position;
-
+	sf::SoundBuffer m_selectBuffer;
+	sf::Sound m_select;
 	void initialise();
 };
 

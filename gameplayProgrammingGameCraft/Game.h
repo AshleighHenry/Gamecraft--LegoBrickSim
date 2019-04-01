@@ -12,7 +12,7 @@
 #include "CheckPoint.h"
 
 
-#include "Fire.h"
+#include "Sparkle.h"
 class SplashScreen;
 class Player;
 
@@ -41,7 +41,7 @@ private:
 	CheckPoint * m_checkPoint;
 
 	int particleCounter;
-	Fire m_checkpointParticles;
+	Sparkle m_checkpointParticles;
 	
 };
 
