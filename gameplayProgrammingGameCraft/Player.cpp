@@ -22,11 +22,11 @@ void Player::update(sf::Time t_dt)
 
 	collisions();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		m_velocity.x += 1;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		m_velocity.x -= 1;
 	}

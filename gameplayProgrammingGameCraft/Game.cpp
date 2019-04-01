@@ -8,6 +8,11 @@
 Game::Game() :
 	m_window{ sf::VideoMode{ 1024, 720 }, "SMFL Game" }
 {
+	if (!m_backgroundText.loadFromFile("Resources\\Images\\SplashScreenIMG.png"))
+	{
+		std::cout << "error : splash screen img not loading" << std::endl;
+	}
+	m_background.setTexture(m_backgroundText);
 	if (!m_font.loadFromFile("Resources\\Fonts\\LEGO BRIX.ttf"))
 	{//error
 	}
@@ -32,7 +37,7 @@ Game::Game() :
 		m_blocks[i] = new Block((rand() % 6), (rand() % 6) + 1,
 			sf::Vector2f(0, -30));
 	}
-	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 980 + 20,690));
+	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 980 + 20, 200 + rand() % 500));
 
 	
 	particleCounter = 0;
@@ -93,6 +98,7 @@ void Game::processEvents()
 		switch (m_gameState)
 		{
 		case GameState::SPLASH_SCREEN:
+			m_splashscreen->update(event);
 			break;
 		case GameState::MAIN_MENU:
 			m_menu.processEvents(event);
@@ -125,7 +131,6 @@ void Game::update(sf::Time dt)
 	switch (m_gameState)
 	{
 	case GameState::SPLASH_SCREEN:
-		m_splashscreen->update();
 		break;
 	case GameState::MAIN_MENU:
 		m_menu.update(m_gameState);
@@ -193,6 +198,7 @@ void Game::render()
 		m_menu.render(m_window);
 		break;
 	case GameState::PLAY:
+		m_window.draw(m_background);
 		for (int i = 0; i <s_MAX_BLOCKS; i++)
 		{
 			m_blocks[i]->render(m_window);
@@ -218,7 +224,7 @@ void Game::render()
 
 void Game::reset()
 {
-	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 980 + 20, 690 ));
+	m_checkPoint = new CheckPoint(sf::Vector2f(rand() % 980 + 20,200 + rand() % 500 ));
 	m_checkpointParticles.Initialise(m_checkPoint->getPosition());
 	for (int i = 0; i < s_MAX_BLOCKS; i++)
 	{

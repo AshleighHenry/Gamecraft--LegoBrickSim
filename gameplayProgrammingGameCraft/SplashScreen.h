@@ -13,7 +13,7 @@ public:
 	SplashScreen(Game & t_game);
 	~SplashScreen();
 
-	void update();
+	void update(sf::Event &t_event);
 	void render(sf::RenderWindow & t_window);
 
 private:

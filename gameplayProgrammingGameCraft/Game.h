@@ -21,8 +21,10 @@ class Game
 public:
 	Game();
 	void run();
-	GameState m_gameState = GameState::MAIN_MENU;
+	GameState m_gameState = GameState::SPLASH_SCREEN;
 private:
+	sf::Texture m_backgroundText;
+	sf::Sprite m_background;
 	void processEvents();
 	void update(sf::Time dt);
 	void render();
@@ -36,7 +38,7 @@ private:
 	//Block * m_block;
 	int m_currentBlock = 0; // the block the player can currently spawn
 	Player m_player;
-	static const int s_MAX_BLOCKS = 5;
+	static const int s_MAX_BLOCKS = 7;
 	Block * m_blocks[s_MAX_BLOCKS];
 	CheckPoint * m_checkPoint;
 
