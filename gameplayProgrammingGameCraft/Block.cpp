@@ -11,6 +11,10 @@ Block::Block(int t_colour, int t_size, sf::Vector2f t_position)
 	{
 		cout << "block not lodeded" << endl;
 	}
+	if (!m_selectBuffer.loadFromFile("Resources\\Sounds\\Select.wav"))
+	{
+	}
+	m_select.setBuffer(m_selectBuffer);
 	m_blockSprite.setTexture(m_texture);
 	switch (m_size)
 	{
@@ -72,11 +76,11 @@ void Block::render(sf::RenderWindow & t_window)
 {
 	if (m_active ==false)
 	{
-		m_blockSprite.setColor(sf::Color(0, 0, 0, 130));
+		m_blockSprite.setColor(sf::Color(255, 255, 255, 130));
 	}
 	else
 	{
-		m_blockSprite.setColor(sf::Color(0, 0, 0, 255));
+		m_blockSprite.setColor(sf::Color(255, 255, 255, 255));
 	}
 	t_window.draw(m_blockSprite);
 }
@@ -116,11 +120,19 @@ bool Block::collisions(Player & t_player)
 void Block::changeActive()
 {
 	m_active = true;
+	m_select.play();
 }
 
 bool Block::getActive()
 {
 	return m_active;
+}
+
+void Block::reset(int t_size)
+{
+	m_active = false;
+	m_blockSprite.setPosition(0, -30);
+	m_size = t_size;
 }
 
 void Block::initialise()

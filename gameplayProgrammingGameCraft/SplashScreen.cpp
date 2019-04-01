@@ -10,11 +10,14 @@ SplashScreen::~SplashScreen()
 {
 }
 
-void SplashScreen::update()
+void SplashScreen::update(sf::Event &t_event)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (t_event.type == sf::Event::KeyReleased)
 	{
-		m_game.m_gameState = GameState::MAIN_MENU;
+		if (t_event.key.code == sf::Keyboard::Space)
+		{
+			m_game.m_gameState = GameState::MAIN_MENU;
+		}
 	}
 }
 
@@ -27,6 +30,7 @@ void SplashScreen::render(sf::RenderWindow & t_window)
 
 void SplashScreen::loadAssets()
 {
+	//
 	if (!m_backgroundText.loadFromFile("Resources\\Images\\SplashScreenIMG.png"))
 	{
 		std::cout << "error : splash screen img not loading" << std::endl;
@@ -47,7 +51,7 @@ void SplashScreen::loadAssets()
 		m_msg.setFont(m_font);
 		m_msg.setCharacterSize(50);
 		m_msg.setFillColor(sf::Color::Black);
-		m_msg.setString(sf::String("LEGO \n    BRICK  \n         SIM\n\n\n\n\n\n\n\n press a to continue"));
+		m_msg.setString(sf::String("LEGO \n    BRICK  \n         SIM\n\n\n\n\n\n\n\n press SPACE to continue"));
 		m_msg.setPosition(sf::Vector2f(25, 25));
 	}
 }

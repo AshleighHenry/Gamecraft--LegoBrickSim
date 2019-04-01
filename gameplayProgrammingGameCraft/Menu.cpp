@@ -40,34 +40,34 @@ Menu::Menu()
 	m_messages[1].setString("CREDITS");
 	m_messages[2].setString("EXIT");
 
-	/*if (!m_selectBuffer.loadFromFile("Resources\\Sounds\\Select.wav"))
+	if (!m_selectBuffer.loadFromFile("Resources\\Sounds\\Select.wav"))
 	{
 	}
 	m_select.setBuffer(m_selectBuffer);
 	if (!m_switchBuffer.loadFromFile("Resources\\Sounds\\Switch.wav"))
 	{
 	}
-	m_switch.setBuffer(m_switchBuffer);*/
+	m_switch.setBuffer(m_switchBuffer);
 }
 
 void Menu::processEvents(sf::Event & t_event)
 {
 	if (t_event.type == sf::Event::KeyReleased)
 	{
-		if (t_event.key.code == sf::Keyboard::Down)
+		if (t_event.key.code == sf::Keyboard::S)
 		{
 			m_downPressed = true;
-			//m_switch.play();
+			m_switch.play();
 		}
-		if (t_event.key.code == sf::Keyboard::Up)
+		if (t_event.key.code == sf::Keyboard::W)
 		{
 			m_upPressed = true;
-			//	m_switch.play();
+			m_switch.play();
 		}
-		if (t_event.key.code == sf::Keyboard::Space)
+		if (t_event.key.code == sf::Keyboard::Space || t_event.key.code == sf::Keyboard::Return)
 		{
 			m_spacePressed = true;
-			//	m_select.play();
+			m_select.play();
 		}
 
 	}
@@ -150,4 +150,9 @@ void Menu::changeSelected()
 	}
 	m_cursor.setPosition(m_buttonPositionStart.x + (m_selected * 100),
 		m_buttonPositionStart.y + (m_selected * 100 + (m_buttonSize.y / 2)));
+}
+
+sf::Vector2f Menu::getCursorPosition()
+{
+	return m_cursor.getPosition();
 }

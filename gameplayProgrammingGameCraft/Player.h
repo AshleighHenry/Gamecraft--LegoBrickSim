@@ -22,18 +22,20 @@ public:
 	void collisions();
 	void activeCollision();
 	void deactiveCollision();
-
 	void jump();
 
-	sf::RectangleShape const getBody();
-
+	void reset(sf::Vector2f t_position, int t_win);
+	sf::RectangleShape getBody() const;
 private:
-
+	void updateColour();
+	void changeColor();
+	playerJumpState m_playerState{ playerJumpState::Air };
 	sf::Sprite playerSprite;
 	sf::Texture playerTexture;
 
 	sf::RectangleShape m_rectangle;
-
+	sf::Color m_color;
+	sf::Color m_newColor;
 	const sf::Vector2f m_gravity{ 0, 90.8f };
 
 	sf::Vector2f m_velocity{ 0,0 };
@@ -44,7 +46,6 @@ private:
 
 	bool colliding{ false };
 
-	playerJumpState m_playerState{ playerJumpState::Air };
 };
 #include "Block.h"
 
